@@ -4,17 +4,25 @@ import {
   text,
   primaryKey,
   integer,
+  boolean,
+  pgEnum,
 } from "drizzle-orm/pg-core";
+// import { createId } from "@paralleldrive/cuid2"
 import type { AdapterAccountType } from "next-auth/adapters";
 
+export const RoleEnum = pgEnum("roles", ["user", "admin"]);
+
 export const users = pgTable("user", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+  id: text("id").notNull().primaryKey(),
+  // .$defaultFn(() => createId()),
   name: text("name"),
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  password: text("password"),
+  twoFactorEnabled: boolean("twoFactorEnabled").default(false),
+  role: RoleEnum("roles").default("user"),
+  customerID: text("customerID"),
 });
 
 export const accounts = pgTable(

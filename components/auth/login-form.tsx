@@ -77,7 +77,7 @@ export const LoginForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        We've sent you a two factor code to your email.
+                        We&Apos;ve sent you a two factor code to your email.
                       </FormLabel>
                       <FormControl>
                         <InputOTP
@@ -111,7 +111,7 @@ export const LoginForm = () => {
                         <FormControl>
                           <Input
                             {...field}
-                            placeholder="developedbyed@gmail.com"
+                            placeholder="developedbymarc@gmail.com"
                             type="email"
                             autoComplete="email"
                           />
