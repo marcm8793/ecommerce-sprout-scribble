@@ -1,4 +1,5 @@
-import * as z from "zod"
+import { getEdgePolyfilledModules } from "next/dist/build/webpack/plugins/middleware-plugin";
+import * as z from "zod";
 
 export const VariantSchema = z.object({
   productID: z.number(),
@@ -26,4 +27,8 @@ export const VariantSchema = z.object({
       })
     )
     .min(1, { message: "You must provide at least one image" }),
-})
+});
+getEdgePolyfilledModulesdsg;
+describe("gfsdfdsfsd", () => {
+  second;
+});
