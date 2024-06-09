@@ -1,10 +1,10 @@
 {
-  "id": "c8bdfae2-230a-4d7d-909a-2d8bdb58843f",
-  "prevId": "f7beda5b-0ab7-4407-94c6-297d8b9a3752",
-  "version": "6",
-  "dialect": "postgresql",
+  "id": "d6fd0919-3bb3-45c5-8c1e-d022f515ea5a",
+  "prevId": "1065485d-07be-49e7-9b54-853c34ca0392",
+  "version": "5",
+  "dialect": "pg",
   "tables": {
-    "public.account": {
+    "account": {
       "name": "account",
       "schema": "",
       "columns": {
@@ -102,7 +102,7 @@
       },
       "uniqueConstraints": {}
     },
-    "public.user": {
+    "user": {
       "name": "user",
       "schema": "",
       "columns": {
@@ -135,6 +135,54 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "twoFactorEnabled": {
+          "name": "twoFactorEnabled",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "roles": {
+          "name": "roles",
+          "type": "roles",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'user'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "verificationToken": {
+      "name": "verificationToken",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
@@ -143,7 +191,15 @@
       "uniqueConstraints": {}
     }
   },
-  "enums": {},
+  "enums": {
+    "roles": {
+      "name": "roles",
+      "values": {
+        "user": "user",
+        "admin": "admin"
+      }
+    }
+  },
   "schemas": {},
   "_meta": {
     "columns": {},

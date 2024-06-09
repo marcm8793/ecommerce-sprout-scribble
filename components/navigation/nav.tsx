@@ -1,13 +1,13 @@
-import { auth } from "@/server/auth";
-import { UserButton } from "./user-button";
-import Link from "next/link";
-import Logo from "@/components/navigation/logo";
-import { Button } from "../ui/button";
-import { LogIn } from "lucide-react";
-// import CartDrawer from "../cart/cart-drawer"
+import { auth } from "@/server/auth"
+import { UserButton } from "./user-button"
+import Link from "next/link"
+import Logo from "@/components/navigation/logo"
+import { Button } from "../ui/button"
+import { LogIn } from "lucide-react"
+import CartDrawer from "../cart/cart-drawer"
 
 export default async function Nav() {
-  const session = await auth();
+  const session = await auth()
   return (
     <header className="py-8">
       <nav>
@@ -18,7 +18,7 @@ export default async function Nav() {
             </Link>
           </li>
           <li className="relative flex items-center hover:bg-muted">
-            {/* <CartDrawer /> */}
+            <CartDrawer />
           </li>
           {!session ? (
             <li className="flex items-center justify-center">
@@ -37,5 +37,5 @@ export default async function Nav() {
         </ul>
       </nav>
     </header>
-  );
+  )
 }

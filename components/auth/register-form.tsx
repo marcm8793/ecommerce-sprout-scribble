@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form"
 import {
   Form,
   FormControl,
@@ -9,20 +9,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { AuthCard } from "./auth-card";
-import { RegisterSchema } from "@/types/register-schema";
-import * as z from "zod";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import { useAction } from "next-safe-action/hooks";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { emailRegister } from "@/server/actions/email-register";
-import { FormSuccess } from "./form-success";
-import { FormError } from "./form-error";
+} from "../ui/form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { AuthCard } from "./auth-card"
+import { RegisterSchema } from "@/types/register-schema"
+import * as z from "zod"
+import { Input } from "../ui/input"
+import { Button } from "../ui/button"
+import Link from "next/link"
+import { useAction } from "next-safe-action/hooks"
+import { cn } from "@/lib/utils"
+import { useState } from "react"
+import { emailRegister } from "@/server/actions/email-register"
+import { FormSuccess } from "./form-success"
+import { FormError } from "./form-error"
 
 export const RegisterForm = () => {
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -32,20 +32,20 @@ export const RegisterForm = () => {
       password: "",
       name: "",
     },
-  });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  })
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
   const { execute, status } = useAction(emailRegister, {
     onSuccess(data) {
-      if (data.error) setError(data.error);
-      if (data.success) setSuccess(data.success);
+      if (data.error) setError(data.error)
+      if (data.success) setSuccess(data.success)
     },
-  });
+  })
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
-    console.log("before server action runs");
-    execute(values);
-  };
+    console.log("before server action runs")
+    execute(values)
+  }
 
   return (
     <AuthCard
@@ -133,5 +133,5 @@ export const RegisterForm = () => {
         </Form>
       </div>
     </AuthCard>
-  );
-};
+  )
+}

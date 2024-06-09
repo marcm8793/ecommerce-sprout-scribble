@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form"
 import {
   Form,
   FormControl,
@@ -9,28 +9,28 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { AuthCard } from "./auth-card";
-import { LoginSchema } from "@/types/login-schema";
-import * as z from "zod";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import { emailSignIn } from "@/server/actions/email-signin";
-import { useAction } from "next-safe-action/hooks";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { FormSuccess } from "./form-success";
-import { FormError } from "./form-error";
-import { useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
+} from "../ui/form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { AuthCard } from "./auth-card"
+import { LoginSchema } from "@/types/login-schema"
+import * as z from "zod"
+import { Input } from "../ui/input"
+import { Button } from "../ui/button"
+import Link from "next/link"
+import { emailSignIn } from "@/server/actions/email-signin"
+import { useAction } from "next-safe-action/hooks"
+import { cn } from "@/lib/utils"
+import { useState } from "react"
+import { FormSuccess } from "./form-success"
+import { FormError } from "./form-error"
+import { useRouter } from "next/navigation"
+import { revalidatePath } from "next/cache"
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "@/components/ui/input-otp";
+} from "@/components/ui/input-otp"
 
 export const LoginForm = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -39,25 +39,25 @@ export const LoginForm = () => {
       email: "",
       password: "",
     },
-  });
-  const router = useRouter();
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [showTwoFactor, setShowTwoFactor] = useState(false);
+  })
+  const router = useRouter()
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+  const [showTwoFactor, setShowTwoFactor] = useState(false)
 
   const { execute, status } = useAction(emailSignIn, {
     onSuccess(data) {
-      if (data?.error) setError(data.error);
+      if (data?.error) setError(data.error)
       if (data?.success) {
-        setSuccess(data.success);
+        setSuccess(data.success)
       }
-      if (data.twoFactor) setShowTwoFactor(true);
+      if (data.twoFactor) setShowTwoFactor(true)
     },
-  });
+  })
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    execute(values);
-  };
+    execute(values)
+  }
 
   return (
     <AuthCard
@@ -77,7 +77,7 @@ export const LoginForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        We&Apos;ve sent you a two factor code to your email.
+                        We&apos;ve sent you a two factor code to your email.
                       </FormLabel>
                       <FormControl>
                         <InputOTP
@@ -111,7 +111,7 @@ export const LoginForm = () => {
                         <FormControl>
                           <Input
                             {...field}
-                            placeholder="developedbymarc@gmail.com"
+                            placeholder="developedbyed@gmail.com"
                             type="email"
                             autoComplete="email"
                           />
@@ -161,5 +161,5 @@ export const LoginForm = () => {
         </Form>
       </div>
     </AuthCard>
-  );
-};
+  )
+}
