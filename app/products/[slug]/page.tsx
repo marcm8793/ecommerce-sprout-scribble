@@ -1,17 +1,17 @@
-import ProductType from "@/components/products/product-type"
-import { db } from "@/server"
-import { productVariants } from "@/server/schema"
-import { eq } from "drizzle-orm"
-import { Separator } from "@/components/ui/separator"
-import formatPrice from "@/lib/format-price"
-import ProductPick from "@/components/products/product-pick"
-import ProductShowcase from "@/components/products/product-showcase"
-import Reviews from "@/components/reviews/reviews"
-import { getReviewAverage } from "@/lib/review-avarage"
-import Stars from "@/components/reviews/stars"
-import AddCart from "@/components/cart/add-cart"
+import ProductType from "@/components/products/product-type";
+import { db } from "@/server";
+import { productVariants } from "@/server/schema";
+import { eq } from "drizzle-orm";
+import { Separator } from "@/components/ui/separator";
+import formatPrice from "@/lib/format-price";
+import ProductPick from "@/components/products/product-pick";
+import ProductShowcase from "@/components/products/product-showcase";
+import Reviews from "@/components/reviews/reviews";
+import { getReviewAverage } from "@/lib/review-avarage";
+import Stars from "@/components/reviews/stars";
+import AddCart from "@/components/cart/add-cart";
 
-export const revalidate = 60
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   const data = await db.query.productVariants.findMany({
@@ -21,12 +21,12 @@ export async function generateStaticParams() {
       product: true,
     },
     orderBy: (productVariants, { desc }) => [desc(productVariants.id)],
-  })
+  });
   if (data) {
-    const slugID = data.map((variant) => ({ slug: variant.id.toString() }))
-    return slugID
+    const slugID = data.map((variant) => ({ slug: variant.id.toString() }));
+    return slugID;
   }
-  return []
+  return [];
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
@@ -42,12 +42,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
         },
       },
     },
-  })
+  });
 
   if (variant) {
     const reviewAvg = getReviewAverage(
       variant?.product.reviews.map((r) => r.rating)
-    )
+    );
 
     return (
       <main>
@@ -65,6 +65,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               />
             </div>
             <Separator className="my-2" />
+            TODO
             <p className="text-2xl font-medium py-2">
               {formatPrice(variant.product.price)}
             </p>
@@ -93,6 +94,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </section>
         <Reviews productID={variant.productID} />
       </main>
-    )
+    );
   }
 }
